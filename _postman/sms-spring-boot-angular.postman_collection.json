@@ -1,0 +1,79 @@
+{
+	"info": {
+		"_postman_id": "276145c7-bedf-4486-b794-73ec775d86e2",
+		"name": "sms-spring-boot-angular",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "10958206"
+	},
+	"item": [
+		{
+			"name": "add new Supplier",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "supplier",
+							"value": "{\"name\": \"Supplier A\", \"email\": \"supplier@example.com\",\"phone\": \"123456789\", \"address\": \"123 Street\"}",
+							"type": "text"
+						},
+						{
+							"key": "logoUrl",
+							"type": "file",
+							"src": [
+								"/C:/Users/Zied/Desktop/Dec-2024/images-4-test/suppliers/LOGO-MENU.png",
+								"/C:/Users/Zied/Desktop/Dec-2024/images-4-test/suppliers/apple-logo.png"
+							]
+						}
+					]
+				},
+				"url": "http://localhost:8080/api/suppliers"
+			},
+			"response": []
+		},
+		{
+			"name": "get All Suppliers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/suppliers"
+			},
+			"response": []
+		},
+		{
+			"name": "update a Supplier by Id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "supplier",
+							"value": "{\"name\": \"Supplier A\", \"email\": \"supplier@example.com\",\"phone\": \"123456789\", \"address\": \"123 Street\"}",
+							"type": "text"
+						},
+						{
+							"key": "logoUrl",
+							"type": "file",
+							"src": "/C:/Users/Zied/Desktop/Dec-2024/images-4-test/suppliers/apple-logo.png"
+						}
+					]
+				},
+				"url": "http://localhost:8080/api/suppliers/1"
+			},
+			"response": []
+		},
+		{
+			"name": "delete a Supplier by Id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8080/api/suppliers/2"
+			},
+			"response": []
+		}
+	]
+}
