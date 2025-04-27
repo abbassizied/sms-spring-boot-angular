@@ -23,7 +23,7 @@ export class AppMenu {
             {
                 label: 'Home',
                 items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/pages/dashboard'] }]
-            }, 
+            },
             {
                 label: 'XXX',
                 items: [{ label: 'Landing', icon: 'pi pi-fw pi-globe', routerLink: [''] }]
@@ -31,14 +31,63 @@ export class AppMenu {
             {
                 label: 'Pages',
                 icon: 'pi pi-fw pi-briefcase', 
-                items: [ 
+                items: [
+                    {
+                        label: 'User Management',
+                        icon: 'pi pi-fw pi-users', // Icon for user management
+                        items: [
+                            {
+                                label: 'List Users',
+                                icon: 'pi pi-fw pi-list',
+                                routerLink: ['/pages/users']
+                            },
+                            {
+                                label: 'Add New User',
+                                icon: 'pi pi-fw pi-plus',
+                                routerLink: ['/pages/users/new']
+                            }
+                        ]
+                    },      
+                    {
+                        label: 'Suppliers',
+                        icon: 'pi pi-fw pi-truck', // Icon for suppliers
+                        items: [
+                            {
+                                label: 'List Suppliers',
+                                icon: 'pi pi-fw pi-list',
+                                routerLink: ['/pages/suppliers']
+                            },
+                            {
+                                label: 'Add New Supplier',
+                                icon: 'pi pi-fw pi-plus',
+                                routerLink: ['/pages/suppliers/new']
+                            }
+                        ]
+                    },
+                    {
+                        label: 'Products',
+                        icon: 'pi pi-fw pi-box', // Icon for products
+                        items: [
+                            {
+                                label: 'List Products',
+                                icon: 'pi pi-fw pi-list',
+                                routerLink: ['/pages/products']
+                            },
+                            {
+                                label: 'Add New Product',
+                                icon: 'pi pi-fw pi-plus',
+                                routerLink: ['/pages/products/new']
+                            }
+                        ]
+                    }, 
                     {
                         label: 'Empty',
                         icon: 'pi pi-fw pi-circle-off',
                         routerLink: ['/pages/empty']
-                    }
+                    } 
                 ]
             },
+ 
        
             {
                 label: 'YYYY',

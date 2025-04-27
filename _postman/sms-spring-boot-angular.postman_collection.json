@@ -22,10 +22,7 @@
 						{
 							"key": "logoUrl",
 							"type": "file",
-							"src": [
-								"/C:/Users/Zied/Desktop/Dec-2024/images-4-test/suppliers/LOGO-MENU.png",
-								"/C:/Users/Zied/Desktop/Dec-2024/images-4-test/suppliers/apple-logo.png"
-							]
+							"src": "/C:/Users/Zied/Desktop/Avril-2025/images-4-test/suppliers/toyota-logo.png"
 						}
 					]
 				},
@@ -58,11 +55,11 @@
 						{
 							"key": "logoUrl",
 							"type": "file",
-							"src": "/C:/Users/Zied/Desktop/Dec-2024/images-4-test/suppliers/apple-logo.png"
+							"src": "/C:/Users/Zied/Desktop/Avril-2025/images-4-test/suppliers/samsung.jpg"
 						}
 					]
 				},
-				"url": "http://localhost:8080/api/suppliers/1"
+				"url": "http://localhost:8080/api/suppliers/4"
 			},
 			"response": []
 		},
@@ -71,7 +68,123 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"url": "http://localhost:8080/api/suppliers/2"
+				"url": "http://localhost:8080/api/suppliers/7"
+			},
+			"response": []
+		},
+		{
+			"name": "get a Supplier by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/suppliers/4"
+			},
+			"response": []
+		},
+		{
+			"name": "Create new product with images",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "product",
+							"value": "{\"name\": \"Premium Coffee\",\"description\": \"Arabica coffee beans from Colombia\",\"price\": 12,\"quantity\": 100,\"supplierId\": 1}",
+							"type": "text"
+						},
+						{
+							"key": "mainImage",
+							"type": "file",
+							"src": "/C:/Users/Zied/Desktop/Avril-2025/images-4-test/products/download.jpeg"
+						},
+						{
+							"key": "images",
+							"type": "file",
+							"src": [
+								"/C:/Users/Zied/Desktop/Avril-2025/images-4-test/products/download.jpeg",
+								"/C:/Users/Zied/Desktop/Avril-2025/images-4-test/products/apple-macbook-air-m1-8go-256go-ssd-gris-4.jpg",
+								"/C:/Users/Zied/Desktop/Avril-2025/images-4-test/products/apple-watch-se-gps-44mm-starlight-aluminium (1).jpg",
+								"/C:/Users/Zied/Desktop/Avril-2025/images-4-test/products/TOYOTA-Yaris-Cross-2021-Neuve-Maroc-12.jpg"
+							]
+						}
+					]
+				},
+				"url": "http://localhost:8080/api/products"
+			},
+			"response": []
+		},
+		{
+			"name": "Get single product",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/products/2"
+			},
+			"response": []
+		},
+		{
+			"name": "Get paginated products",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/products"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all products (non-paginated)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/products/all"
+			},
+			"response": []
+		},
+		{
+			"name": "Update product",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "product",
+							"value": "{\"name\": \"Laptop\",\"price\": 999.99,\"description\": \"High-performance laptop\",\"quantity\": 99,\"supplierId\": 3 }",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8080/api/products/2"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete product",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8080/api/products/{id}"
 			},
 			"response": []
 		}
