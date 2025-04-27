@@ -1,2 +1,6 @@
 ### STS ###
 .metadata/
+
+# Ignore Docker data directory
+_docker/data/
+

@@ -18,8 +18,8 @@ public interface SupplierMapper {
     @Mapping(target = "products", ignore = true) // Ignore products mapping (not present in request)
     @Mapping(target = "dateCreated", ignore = true) // Ignore dateCreated
     @Mapping(target = "lastUpdated", ignore = true) // Ignore lastUpdated
-    Supplier toSupplier(SupplierRequest dto);
+    Supplier supplierRequestToSupplier(SupplierRequest dto);
 
 
-    SupplierResponse fromSupplier(Supplier supplier);
+    SupplierResponse supplierToSupplierResponse(Supplier supplier);
 }

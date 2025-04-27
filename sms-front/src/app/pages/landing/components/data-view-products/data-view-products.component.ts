@@ -58,20 +58,4 @@ export class DataViewProductsComponent implements OnInit {
             { name: 'Rome', code: 'RM' }
         ];
     }
-
-    getSeverity(product: Product) {
-        switch (product.inventoryStatus) {
-            case 'INSTOCK':
-                return 'success';
-
-            case 'LOWSTOCK':
-                return 'warn';
-
-            case 'OUTOFSTOCK':
-                return 'danger';
-
-            default:
-                return 'info';
-        }
-    }
 }

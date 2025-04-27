@@ -7,364 +7,244 @@ export class ProductService {
     getProductsData() {
         return [
             {
-                id: '1000',
-                code: 'f230fh0g3',
+                id: '1000', 
                 name: 'Bamboo Watch',
                 description: 'Product Description',
                 image: 'bamboo-watch.jpg',
-                price: 65,
-                category: 'Accessories',
-                quantity: 24,
-                inventoryStatus: 'INSTOCK',
-                rating: 5
+                price: 65, 
+                quantity: 24 
             },
             {
-                id: '1001',
-                code: 'nvklal433',
+                id: '1001', 
                 name: 'Black Watch',
                 description: 'Product Description',
                 image: 'black-watch.jpg',
-                price: 72,
-                category: 'Accessories',
-                quantity: 61,
-                inventoryStatus: 'OUTOFSTOCK',
-                rating: 4
+                price: 72, 
+                quantity: 61 
             },
             {
-                id: '1002',
-                code: 'zz21cz3c1',
+                id: '1002', 
                 name: 'Blue Band',
                 description: 'Product Description',
                 image: 'blue-band.jpg',
-                price: 79,
-                category: 'Fitness',
-                quantity: 2,
-                inventoryStatus: 'LOWSTOCK',
-                rating: 3
+                price: 79, 
+                quantity: 2 
             },
             {
-                id: '1003',
-                code: '244wgerg2',
+                id: '1003', 
                 name: 'Blue T-Shirt',
                 description: 'Product Description',
                 image: 'blue-t-shirt.jpg',
-                price: 29,
-                category: 'Clothing',
-                quantity: 25,
-                inventoryStatus: 'INSTOCK',
-                rating: 5
+                price: 29, 
+                quantity: 25 
             },
             {
-                id: '1004',
-                code: 'h456wer53',
+                id: '1004', 
                 name: 'Bracelet',
                 description: 'Product Description',
                 image: 'bracelet.jpg',
-                price: 15,
-                category: 'Accessories',
-                quantity: 73,
-                inventoryStatus: 'INSTOCK',
-                rating: 4
+                price: 15, 
+                quantity: 73 
             },
             {
-                id: '1005',
-                code: 'av2231fwg',
+                id: '1005', 
                 name: 'Brown Purse',
                 description: 'Product Description',
                 image: 'brown-purse.jpg',
-                price: 120,
-                category: 'Accessories',
-                quantity: 0,
-                inventoryStatus: 'OUTOFSTOCK',
-                rating: 4
+                price: 120, 
+                quantity: 0 
             },
             {
-                id: '1006',
-                code: 'bib36pfvm',
+                id: '1006', 
                 name: 'Chakra Bracelet',
                 description: 'Product Description',
                 image: 'chakra-bracelet.jpg',
-                price: 32,
-                category: 'Accessories',
-                quantity: 5,
-                inventoryStatus: 'LOWSTOCK',
-                rating: 3
+                price: 32, 
+                quantity: 5 
             },
             {
-                id: '1007',
-                code: 'mbvjkgip5',
+                id: '1007', 
                 name: 'Galaxy Earrings',
                 description: 'Product Description',
                 image: 'galaxy-earrings.jpg',
-                price: 34,
-                category: 'Accessories',
-                quantity: 23,
-                inventoryStatus: 'INSTOCK',
-                rating: 5
+                price: 34, 
+                quantity: 23 
             },
             {
-                id: '1008',
-                code: 'vbb124btr',
+                id: '1008', 
                 name: 'Game Controller',
                 description: 'Product Description',
                 image: 'game-controller.jpg',
-                price: 99,
-                category: 'Electronics',
-                quantity: 2,
-                inventoryStatus: 'LOWSTOCK',
-                rating: 4
+                price: 99, 
+                quantity: 2 
             },
             {
-                id: '1009',
-                code: 'cm230f032',
+                id: '1009', 
                 name: 'Gaming Set',
                 description: 'Product Description',
                 image: 'gaming-set.jpg',
-                price: 299,
-                category: 'Electronics',
-                quantity: 63,
-                inventoryStatus: 'INSTOCK',
-                rating: 3
+                price: 299, 
+                quantity: 63 
             },
             {
-                id: '1010',
-                code: 'plb34234v',
+                id: '1010', 
                 name: 'Gold Phone Case',
                 description: 'Product Description',
                 image: 'gold-phone-case.jpg',
-                price: 24,
-                category: 'Accessories',
-                quantity: 0,
-                inventoryStatus: 'OUTOFSTOCK',
-                rating: 4
+                price: 24, 
+                quantity: 0 
             },
             {
-                id: '1011',
-                code: '4920nnc2d',
+                id: '1011', 
                 name: 'Green Earbuds',
                 description: 'Product Description',
                 image: 'green-earbuds.jpg',
-                price: 89,
-                category: 'Electronics',
-                quantity: 23,
-                inventoryStatus: 'INSTOCK',
-                rating: 4
+                price: 89, 
+                quantity: 23 
             },
             {
-                id: '1012',
-                code: '250vm23cc',
+                id: '1012', 
                 name: 'Green T-Shirt',
                 description: 'Product Description',
                 image: 'green-t-shirt.jpg',
-                price: 49,
-                category: 'Clothing',
-                quantity: 74,
-                inventoryStatus: 'INSTOCK',
-                rating: 5
+                price: 49, 
+                quantity: 74 
             },
             {
-                id: '1013',
-                code: 'fldsmn31b',
+                id: '1013', 
                 name: 'Grey T-Shirt',
                 description: 'Product Description',
                 image: 'grey-t-shirt.jpg',
-                price: 48,
-                category: 'Clothing',
-                quantity: 0,
-                inventoryStatus: 'OUTOFSTOCK',
-                rating: 3
+                price: 48, 
+                quantity: 0 
             },
             {
-                id: '1014',
-                code: 'waas1x2as',
+                id: '1014', 
                 name: 'Headphones',
                 description: 'Product Description',
                 image: 'headphones.jpg',
-                price: 175,
-                category: 'Electronics',
-                quantity: 8,
-                inventoryStatus: 'LOWSTOCK',
-                rating: 5
+                price: 175, 
+                quantity: 8 
             },
             {
-                id: '1015',
-                code: 'vb34btbg5',
+                id: '1015', 
                 name: 'Light Green T-Shirt',
                 description: 'Product Description',
                 image: 'light-green-t-shirt.jpg',
-                price: 49,
-                category: 'Clothing',
-                quantity: 34,
-                inventoryStatus: 'INSTOCK',
-                rating: 4
+                price: 49, 
+                quantity: 34 
             },
             {
-                id: '1016',
-                code: 'k8l6j58jl',
+                id: '1016', 
                 name: 'Lime Band',
                 description: 'Product Description',
                 image: 'lime-band.jpg',
-                price: 79,
-                category: 'Fitness',
-                quantity: 12,
-                inventoryStatus: 'INSTOCK',
-                rating: 3
+                price: 79, 
+                quantity: 12 
             },
             {
-                id: '1017',
-                code: 'v435nn85n',
+                id: '1017', 
                 name: 'Mini Speakers',
                 description: 'Product Description',
                 image: 'mini-speakers.jpg',
-                price: 85,
-                category: 'Clothing',
-                quantity: 42,
-                inventoryStatus: 'INSTOCK',
-                rating: 4
+                price: 85, 
+                quantity: 42 
             },
             {
-                id: '1018',
-                code: '09zx9c0zc',
+                id: '1018', 
                 name: 'Painted Phone Case',
                 description: 'Product Description',
                 image: 'painted-phone-case.jpg',
-                price: 56,
-                category: 'Accessories',
-                quantity: 41,
-                inventoryStatus: 'INSTOCK',
-                rating: 5
+                price: 56, 
+                quantity: 41 
             },
             {
-                id: '1019',
-                code: 'mnb5mb2m5',
+                id: '1019', 
                 name: 'Pink Band',
                 description: 'Product Description',
                 image: 'pink-band.jpg',
-                price: 79,
-                category: 'Fitness',
-                quantity: 63,
-                inventoryStatus: 'INSTOCK',
-                rating: 4
+                price: 79, 
+                quantity: 63 
             },
             {
-                id: '1020',
-                code: 'r23fwf2w3',
+                id: '1020', 
                 name: 'Pink Purse',
                 description: 'Product Description',
                 image: 'pink-purse.jpg',
-                price: 110,
-                category: 'Accessories',
-                quantity: 0,
-                inventoryStatus: 'OUTOFSTOCK',
-                rating: 4
+                price: 110, 
+                quantity: 0 
             },
             {
-                id: '1021',
-                code: 'pxpzczo23',
+                id: '1021', 
                 name: 'Purple Band',
                 description: 'Product Description',
                 image: 'purple-band.jpg',
-                price: 79,
-                category: 'Fitness',
-                quantity: 6,
-                inventoryStatus: 'LOWSTOCK',
-                rating: 3
+                price: 79, 
+                quantity: 6 
             },
             {
-                id: '1022',
-                code: '2c42cb5cb',
+                id: '1022', 
                 name: 'Purple Gemstone Necklace',
                 description: 'Product Description',
                 image: 'purple-gemstone-necklace.jpg',
-                price: 45,
-                category: 'Accessories',
-                quantity: 62,
-                inventoryStatus: 'INSTOCK',
-                rating: 4
+                price: 45, 
+                quantity: 62 
             },
             {
-                id: '1023',
-                code: '5k43kkk23',
+                id: '1023', 
                 name: 'Purple T-Shirt',
                 description: 'Product Description',
                 image: 'purple-t-shirt.jpg',
-                price: 49,
-                category: 'Clothing',
-                quantity: 2,
-                inventoryStatus: 'LOWSTOCK',
-                rating: 5
+                price: 49, 
+                quantity: 2 
             },
             {
-                id: '1024',
-                code: 'lm2tny2k4',
+                id: '1024', 
                 name: 'Shoes',
                 description: 'Product Description',
                 image: 'shoes.jpg',
-                price: 64,
-                category: 'Clothing',
-                quantity: 0,
-                inventoryStatus: 'INSTOCK',
-                rating: 4
+                price: 64, 
+                quantity: 0 
             },
             {
-                id: '1025',
-                code: 'nbm5mv45n',
+                id: '1025', 
                 name: 'Sneakers',
                 description: 'Product Description',
                 image: 'sneakers.jpg',
-                price: 78,
-                category: 'Clothing',
-                quantity: 52,
-                inventoryStatus: 'INSTOCK',
-                rating: 4
+                price: 78, 
+                quantity: 52 
             },
             {
-                id: '1026',
-                code: 'zx23zc42c',
+                id: '1026', 
                 name: 'Teal T-Shirt',
                 description: 'Product Description',
                 image: 'teal-t-shirt.jpg',
-                price: 49,
-                category: 'Clothing',
-                quantity: 3,
-                inventoryStatus: 'LOWSTOCK',
-                rating: 3
+                price: 49, 
+                quantity: 3 
             },
             {
-                id: '1027',
-                code: 'acvx872gc',
+                id: '1027', 
                 name: 'Yellow Earbuds',
                 description: 'Product Description',
                 image: 'yellow-earbuds.jpg',
-                price: 89,
-                category: 'Electronics',
-                quantity: 35,
-                inventoryStatus: 'INSTOCK',
-                rating: 3
+                price: 89, 
+                quantity: 35 
             },
             {
-                id: '1028',
-                code: 'tx125ck42',
+                id: '1028', 
                 name: 'Yoga Mat',
                 description: 'Product Description',
                 image: 'yoga-mat.jpg',
-                price: 20,
-                category: 'Fitness',
-                quantity: 15,
-                inventoryStatus: 'INSTOCK',
-                rating: 5
+                price: 20, 
+                quantity: 15 
             },
             {
-                id: '1029',
-                code: 'gwuby345v',
+                id: '1029', 
                 name: 'Yoga Set',
                 description: 'Product Description',
                 image: 'yoga-set.jpg',
-                price: 20,
-                category: 'Fitness',
-                quantity: 25,
-                inventoryStatus: 'INSTOCK',
-                rating: 8
+                price: 20, 
+                quantity: 25 
             }
         ];
     }

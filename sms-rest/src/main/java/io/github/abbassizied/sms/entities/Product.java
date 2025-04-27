@@ -2,6 +2,10 @@ package io.github.abbassizied.sms.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -35,13 +39,17 @@ public class Product {
 	private Double price;
 
 	@Column(nullable = false)
-	private Integer initialQuantity;
-
-	@Column(nullable = false)
 	private Integer quantity;
 
-	@ManyToOne
+	/*
+	 * 
+	 * FetchType.LAZY = Doesn’t load the relationships unless explicitly “asked for” via getter 
+	 * FetchType.EAGER = Loads ALL relationships
+	 */	
+	
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "supplier_id", nullable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Supplier supplier;
 
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
