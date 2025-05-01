@@ -1,3 +1,132 @@
-<div class="card"> 
-    <p>supplier-form works!</p>
-</div>
+<!-- Add Toast at the top of the template -->
+<p-toast></p-toast>
+
+<div class="card flex flex-col gap-4">
+    <h2>{{ isEditMode() ? 'Edit Supplier' : 'Create Supplier' }}</h2>
+  
+    <form [formGroup]="supplierForm" (ngSubmit)="onSubmit()">
+      <!-- Name Field -->
+      <div class="flex items-start gap-4 mb-3">
+        <label for="name" class="w-32 pt-2 font-medium">Name</label>
+        <div class="flex flex-col flex-1">
+          <input
+            type="text"
+            pInputText
+            id="name"
+            formControlName="name"
+            [class.p-invalid]="supplierForm.controls.name.invalid && supplierForm.controls.name.touched"
+          />
+          @if (supplierForm.controls.name.invalid && supplierForm.controls.name.touched) {
+            <p-message severity="error" variant="text" text="Name is required" styleClass="mt-1" />
+          }
+        </div>
+      </div>
+  
+      <!-- Email Field -->
+      <div class="flex items-start gap-4 mb-3">
+        <label for="email" class="w-32 pt-2 font-medium">Email</label>
+        <div class="flex flex-col flex-1">
+          <input
+            type="email"
+            pInputText
+            id="email"
+            formControlName="email"
+            [class.p-invalid]="supplierForm.controls.email.invalid && supplierForm.controls.email.touched"
+          />
+          @if (supplierForm.controls.email.invalid && supplierForm.controls.email.touched) {
+            <p-message severity="error" variant="text" text="Valid email is required" styleClass="mt-1" />
+          }
+        </div>
+      </div>
+  
+      <!-- Phone Field -->
+      <div class="flex items-start gap-4 mb-3">
+        <label for="phone" class="w-32 pt-2 font-medium">Phone</label>
+        <div class="flex flex-col flex-1">
+          <p-inputNumber
+            id="phone"
+            formControlName="phone"
+            mode="decimal"
+            [useGrouping]="false"
+            [showButtons]="false"
+            [class.p-invalid]="supplierForm.controls.phone.invalid && supplierForm.controls.phone.touched"
+            [allowEmpty]="true"
+          />
+          @if (supplierForm.controls.phone.invalid && supplierForm.controls.phone.touched) {
+            <p-message severity="error" variant="text" text="Phone is required" styleClass="mt-1" />
+          }
+        </div>
+      </div>
+  
+      <!-- Address Field -->
+      <div class="flex items-start gap-4 mb-3">
+        <label for="address" class="w-32 pt-2 font-medium">Address</label>
+        <div class="flex flex-col flex-1">
+          <textarea
+            pInputTextarea
+            id="address"
+            formControlName="address"
+            rows="3"
+            [class.p-invalid]="supplierForm.controls.address.invalid && supplierForm.controls.address.touched"
+          ></textarea>
+          @if (supplierForm.controls.address.invalid && supplierForm.controls.address.touched) {
+            <p-message
+              severity="error"
+              variant="text"
+              [text]="supplierForm.controls.address.errors?.['required'] ? 'Address is required' : 'Invalid address'"
+              styleClass="mt-1"
+            />
+          }
+        </div>
+      </div>
+  
+      <!-- Logo Preview -->
+      @if (isEditMode() && existingLogoUrl()) {
+        <div class="flex items-start gap-4 mb-3">
+          <label class="w-32 pt-2 font-medium">Current Logo</label>
+          <div class="flex flex-col flex-1">
+            <img [src]="existingLogoUrl()" alt="Supplier logo" class="border-round shadow-2" style="max-width: 150px" />
+          </div>
+        </div>
+      }
+  
+      <!-- Logo Upload -->
+      <div class="flex items-start gap-4 mb-3">
+        <label for="logo" class="w-32 pt-2 font-medium">Logo</label>
+        <div class="flex flex-col flex-1">
+          <p-fileUpload
+            mode="basic"
+            name="logo"
+            chooseLabel="Choose"
+            chooseIcon="pi pi-upload"
+            accept="image/*"
+            (onSelect)="onFileChange($event)"
+            (onClear)="selectedFile.set(null)"
+            [class.p-invalid]="logoRequiredError()"
+          >
+            <ng-template pTemplate="content">
+              @if (selectedFile()) {
+                <span class="ml-2">{{ selectedFile()?.name }}</span>
+              }
+            </ng-template>
+          </p-fileUpload>
+          @if (logoRequiredError()) {
+            <p-message severity="error" variant="text" text="Logo is required" styleClass="mt-1" />
+          }
+        </div>
+      </div>
+  
+      <!-- Form Actions -->
+      <div class="flex gap-4 mt-4">
+        <p-button
+          type="submit"
+          [disabled]="supplierForm.invalid"
+          [label]="isEditMode() ? 'Update' : 'Create'"
+          severity="success"
+        ></p-button>
+        <p-button label="Cancel" icon="pi pi-undo" routerLink="/pages/suppliers" [outlined]="true" severity="secondary">
+        </p-button>
+      </div>
+    </form>
+  </div>
+  

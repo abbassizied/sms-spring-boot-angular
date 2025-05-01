@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/suppliers")
+@CrossOrigin(origins = "http://localhost:4200") // Allow Angular frontend
 public class SupplierRestController {
 
     private final SupplierService supplierService;

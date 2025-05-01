@@ -1,1 +1,52 @@
-<p>supplier-detail works!</p>
+<!-- supplier-detail.component.html -->
+<div class="p-4">
+    @if (isLoading()) {
+        <div class="flex justify-content-center align-items-center h-20rem">
+            <p-progressSpinner></p-progressSpinner>
+        </div>
+    } @else if (error()) {
+        <!-- Only show message when error exists -->
+        <p-message *ngIf="error()" severity="error" [text]="error()!"></p-message>
+        <div class="mt-4">
+            <p-button label="Back to List" icon="pi pi-arrow-left" routerLink="/pages/suppliers"></p-button>
+        </div>
+    } @else if (supplier()) {
+        <p-card [header]="supplier()!.name" subheader="Supplier Details">
+            <div class="grid">
+                <!-- Image Column -->
+                @if (supplier()!.logoUrl) {
+                    <div class="card flex justify-center">
+                        <p-image [src]="supplier()!.logoUrl" alt="Supplier Logo" width="250" [preview]="true" />
+                    </div>
+                }
+
+                <!-- Details Column -->
+                <div class="col-12 md:col-8">
+                    <p-fieldset legend="Contact Information">
+                        <div class="grid">
+                            <div class="col-12 md:col-6">
+                                <p class="text-900 font-medium mb-1">Email:</p>
+                                <p>{{ supplier()!.email || '-' }}</p>
+                            </div>
+                            <div class="col-12 md:col-6">
+                                <p class="text-900 font-medium mb-1">Phone:</p>
+                                <p>{{ supplier()!.phone || '-' }}</p>
+                            </div>
+                            <div class="col-12">
+                                <p class="text-900 font-medium mb-1">Address:</p>
+                                <p>{{ supplier()!.address || '-' }}</p>
+                            </div>
+                        </div>
+                    </p-fieldset>
+                </div>
+            </div>
+
+            <ng-template pTemplate="footer">
+                <div class="flex gap-4 mt-1">
+                    <p-button label="Back" icon="pi pi-arrow-left" routerLink="/pages/suppliers" [outlined]="true" />
+                    <p-button label="Edit" icon="pi pi-pencil" severity="info" [routerLink]="['/pages/suppliers/edit', supplier()!.id]" [outlined]="true" />
+                </div>
+            </ng-template>
+        </p-card>
+    }
+</div>
