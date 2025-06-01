@@ -8,7 +8,8 @@ services:
     ports:
       - "3306:3306"  # Expose MySQL port to host    
     environment:
-      MYSQL_ROOT_PASSWORD: root  # Set a strong password for the MySQL root user
+      MYSQL_DATABASE: amsdbrest2025
+      MYSQL_ROOT_PASSWORD: notSecureChangeMe  # Set a strong password for the MySQL root user
     volumes:
       - ./data:/var/lib/mysql # Persist data volume for database     
     networks:
