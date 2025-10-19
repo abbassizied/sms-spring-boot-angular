@@ -6,10 +6,9 @@ services:
     container_name: mysql-container # Lowercase and underscores (naming convention)
     restart: always
     ports:
-      - "3306:3306"  # Expose MySQL port to host    
-    environment:
-      MYSQL_DATABASE: amsdbrest2025
-      MYSQL_ROOT_PASSWORD: notSecureChangeMe  # Set a strong password for the MySQL root user
+      - "3306:3306" # Expose MySQL port to host    
+    environment: 
+      MYSQL_ROOT_PASSWORD: root # Set a strong password for the MySQL root user
     volumes:
       - ./data:/var/lib/mysql # Persist data volume for database     
     networks:
@@ -22,11 +21,11 @@ services:
     container_name: pma-container
     restart: always
     ports:
-      - "8081:80"  # Maps port 8081 on your host to port 80 (default for phpMyAdmin) inside the container
+      - "8081:80" # Maps port 8081 on your host to port 80 (default for phpMyAdmin) inside the container
     environment:
       - PMA_ARBITRARY=1
     depends_on:
-      - mysql  # This ensures the database service is started before phpMyAdmin attempts to connect
+      - mysql # This ensures the database service is started before phpMyAdmin attempts to connect
     networks:
       - mysql-pma-network
       
