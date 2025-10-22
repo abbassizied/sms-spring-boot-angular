@@ -22,6 +22,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/products")
+@CrossOrigin(origins = "http://localhost:4200") // Allow Angular frontend
 public class ProductRestController {
 
 	private final ProductService productService;

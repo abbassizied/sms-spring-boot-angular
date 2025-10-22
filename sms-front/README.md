@@ -44,6 +44,7 @@ ng g c layouts/header
 ng g c layouts/footer
 ng g c layouts/app-layout
 ng g c layouts/sidebar
+ng g c components/pagination
 //-----------------------
 
 //-----------------------
