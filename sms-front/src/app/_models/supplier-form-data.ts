@@ -4,5 +4,5 @@ export interface SupplierFormData {
     logoUrl?: File;
     email: string;
     phone: string;
-    address?: string; 
+    address?: string;
 }

@@ -1,0 +1,48 @@
+<!-- Drawer Toggle Checkbox (Hidden) -->
+<!-- Added aria-label for the checkbox -->
+<input type="checkbox" id="drawer-toggle" class="hidden peer" aria-label="Toggle navigation menu">
+
+<!-- Sidebar/Drawer -->
+<div
+    class="fixed inset-y-0 left-0 z-40 w-64 bg-white shadow-lg transform -translate-x-full transition-transform duration-300 ease-in-out peer-checked:translate-x-0 lg:translate-x-0">
+    <div class="flex items-center justify-center h-16 px-4 border-b">
+        <i class="fas fa-chart-line text-blue-500 text-xl" aria-hidden="true"></i>
+        <span class="ml-3 text-lg font-bold text-gray-800">SMS</span>
+    </div>
+    <nav class="mt-6" aria-label="Main navigation">
+        <div class="px-4 space-y-2">
+            <a routerLink="suppliers" routerLinkActive="text-gray-700 bg-blue-50 border-r-4 border-blue-500"
+                [routerLinkActiveOptions]="{exact: true}"
+                class="flex items-center px-4 py-3 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors">
+                <i class="fa-solid fa-truck"></i>
+                <span class="ml-4 font-medium">Suppliers</span>
+            </a>
+            <a routerLink="products" routerLinkActive="text-gray-700 bg-blue-50 border-r-4 border-blue-500"
+                [routerLinkActiveOptions]="{exact: true}"
+                class="flex items-center px-4 py-3 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors">
+                <i class="fa-solid fa-box"></i>
+                <span class="ml-4 font-medium">Products</span>
+            </a>
+            <a routerLink="#" routerLinkActive="text-gray-700 bg-blue-50 border-r-4 border-blue-500"
+                [routerLinkActiveOptions]="{exact: true}"
+                class="flex items-center px-4 py-3 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors">
+                <i class="fa-solid fa-users"></i>
+                <span class="ml-4 font-medium">Users</span>
+            </a>
+            <a href="#" routerLinkActive="text-gray-700 bg-blue-50 border-r-4 border-blue-500"
+                [routerLinkActiveOptions]="{exact: true}"
+                class="flex items-center px-4 py-3 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors">
+                <i class="fas fa-cog" aria-hidden="true"></i>
+                <span class="ml-4 font-medium">Settings</span>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<!-- Overlay for Mobile -->
+<!-- Added explicit label text and aria-hidden since this is decorative -->
+<label for="drawer-toggle"
+    class="fixed inset-0 bg-black bg-opacity-25 z-30 hidden peer-checked:block lg:hidden cursor-pointer"
+    aria-hidden="true">
+    <span class="sr-only">Close navigation menu</span>
+</label>

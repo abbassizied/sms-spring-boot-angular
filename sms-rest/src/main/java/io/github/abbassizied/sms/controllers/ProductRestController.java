@@ -29,7 +29,7 @@ public class ProductRestController {
 	@PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<ProductResponse> createProduct(
 			@Valid @RequestParam("product") String productJson,
-			@RequestPart MultipartFile mainImage, 
+			@RequestPart MultipartFile mainImage,
 			@RequestPart(required = false) List<MultipartFile> images) throws IOException {
 
 		// Convert JSON String to ProductRequest object
@@ -67,9 +67,9 @@ public class ProductRestController {
 			@RequestPart(required = false) MultipartFile mainImage,
 			@RequestPart(required = false) List<MultipartFile> images) throws IOException {
 
-        // Convert JSON String to ProductRequest object
-        ProductRequest productRequest = convertJsonToProductRequest(productJson);
-        
+		// Convert JSON String to ProductRequest object
+		ProductRequest productRequest = convertJsonToProductRequest(productJson);
+
 		log.info("Updating product with ID: {}", id);
 		ProductResponse response = productService.updateProduct(id, productRequest, mainImage, images);
 		return ResponseEntity.ok(response);

@@ -1,0 +1,143 @@
+<!-- product-form.component.html -->
+<p-toast></p-toast>
+
+<div class="card flex flex-col gap-4">
+    <h2>{{ isEditMode() ? 'Edit Product' : 'Create Product' }}</h2>
+  
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+        <!-- Name Field -->
+        <div class="flex items-start gap-4 mb-3">
+            <label for="name" class="w-32 pt-2 font-medium">Name</label>
+            <div class="flex flex-col flex-1">
+                <input
+                    type="text"
+                    pInputText
+                    id="name"
+                    formControlName="name"
+                    [class.p-invalid]="productForm.controls.name.invalid && productForm.controls.name.touched"
+                />
+                @if (productForm.controls.name.invalid && productForm.controls.name.touched) {
+                    <p-message severity="error" variant="text" text="Name is required" styleClass="mt-1" />
+                }
+            </div>
+        </div>
+
+        <!-- Description Field -->
+        <div class="flex items-start gap-4 mb-3">
+            <label for="description" class="w-32 pt-2 font-medium">Description</label>
+            <div class="flex flex-col flex-1">
+                <textarea
+                    pInputTextarea
+                    id="description"
+                    formControlName="description"
+                    rows="3"
+                    [class.p-invalid]="productForm.controls.description.invalid && productForm.controls.description.touched"
+                ></textarea>
+                @if (productForm.controls.description.invalid && productForm.controls.description.touched) {
+                    <p-message severity="error" variant="text" text="Description is required" styleClass="mt-1" />
+                }
+            </div>
+        </div>
+
+        <!-- Price Field -->
+        <div class="flex items-start gap-4 mb-3">
+            <label for="price" class="w-32 pt-2 font-medium">Price</label>
+            <div class="flex flex-col flex-1">
+                <p-inputNumber
+                    id="price"
+                    formControlName="price"
+                    mode="currency"
+                    currency="USD"
+                    [showButtons]="false"
+                    [class.p-invalid]="productForm.controls.price.invalid && productForm.controls.price.touched"
+                />
+                @if (productForm.controls.price.invalid && productForm.controls.price.touched) {
+                    <p-message severity="error" variant="text" text="Valid price is required" styleClass="mt-1" />
+                }
+            </div>
+        </div>
+
+        <!-- Quantity Field -->
+        <div class="flex items-start gap-4 mb-3">
+            <label for="quantity" class="w-32 pt-2 font-medium">Quantity</label>
+            <div class="flex flex-col flex-1">
+                <p-inputNumber
+                    id="quantity"
+                    formControlName="quantity"
+                    mode="decimal"
+                    [showButtons]="false"
+                    [min]="0"
+                    [class.p-invalid]="productForm.controls.quantity.invalid && productForm.controls.quantity.touched"
+                />
+                @if (productForm.controls.quantity.invalid && productForm.controls.quantity.touched) {
+                    <p-message severity="error" variant="text" text="Valid quantity is required" styleClass="mt-1" />
+                }
+            </div>
+        </div>
+
+        <!-- Supplier ID Field -->
+        <div class="flex items-start gap-4 mb-3">
+            <label for="supplierId" class="w-32 pt-2 font-medium">Supplier ID</label>
+            <div class="flex flex-col flex-1">
+                <p-inputNumber
+                    id="supplierId"
+                    formControlName="supplierId"
+                    mode="decimal"
+                    [showButtons]="false"
+                    [min]="1"
+                    [class.p-invalid]="productForm.controls.supplierId.invalid && productForm.controls.supplierId.touched"
+                />
+                @if (productForm.controls.supplierId.invalid && productForm.controls.supplierId.touched) {
+                    <p-message severity="error" variant="text" text="Supplier ID is required" styleClass="mt-1" />
+                }
+            </div>
+        </div>
+
+        <!-- Image Preview -->
+        @if (isEditMode() && existingImageUrl()) {
+            <div class="flex items-start gap-4 mb-3">
+                <label class="w-32 pt-2 font-medium">Current Image</label>
+                <div class="flex flex-col flex-1">
+                    <img [src]="existingImageUrl()" alt="Product image" class="border-round shadow-2" style="max-width: 150px" />
+                </div>
+            </div>
+        }
+
+        <!-- Image Upload -->
+        <div class="flex items-start gap-4 mb-3">
+            <label for="image" class="w-32 pt-2 font-medium">Product Image</label>
+            <div class="flex flex-col flex-1">
+                <p-fileUpload
+                    mode="basic"
+                    name="image"
+                    chooseLabel="Choose Image"
+                    chooseIcon="pi pi-upload"
+                    accept="image/*"
+                    (onSelect)="onFileChange($event)"
+                    (onClear)="selectedFile.set(null)"
+                >
+                    <ng-template pTemplate="content">
+                        @if (selectedFile()) {
+                            <span class="ml-2">{{ selectedFile()?.name }}</span>
+                        }
+                    </ng-template>
+                </p-fileUpload>
+                @if (imageRequiredError()) {
+                    <p-message severity="error" variant="text" text="Product image is required" styleClass="mt-1" />
+                }
+            </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="flex gap-4 mt-4">
+            <p-button
+                type="submit"
+                [disabled]="productForm.invalid"
+                [label]="isEditMode() ? 'Update' : 'Create'"
+                severity="success"
+            ></p-button>
+            <p-button label="Cancel" icon="pi pi-undo" routerLink="/pages/products" [outlined]="true" severity="secondary">
+            </p-button>
+        </div>
+    </form>
+</div>

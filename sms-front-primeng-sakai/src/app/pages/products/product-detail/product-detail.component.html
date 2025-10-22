@@ -1,0 +1,68 @@
+<!-- product-detail.component.html -->
+<div class="p-4">
+    @if (isLoading()) {
+        <div class="flex justify-content-center align-items-center h-20rem">
+            <p-progressSpinner></p-progressSpinner>
+        </div>
+    } @else if (error()) {
+        <p-message severity="error" [text]="error()!"></p-message>
+        <div class="mt-4">
+            <p-button label="Back to List" icon="pi pi-arrow-left" routerLink="/pages/products"></p-button>
+        </div>
+    } @else if (product()) {
+        <p-card [header]="product()!.name" subheader="Product Details">
+            <div class="grid">
+                <!-- Image Column -->
+                @if (product()!.image) {
+                    <div class="col-12 md:col-4">
+                        <div class="card flex justify-center">
+                            <p-image [src]="product()!.image" alt="Product Image" width="300" [preview]="true" />
+                        </div>
+                    </div>
+                }
+
+                <!-- Details Column -->
+                <div class="col-12 md:col-8">
+                    <p-fieldset legend="Product Information">
+                        <div class="grid">
+                            <div class="col-12">
+                                <p class="text-900 font-medium mb-1">Description:</p>
+                                <p>{{ product()!.description || '-' }}</p>
+                            </div>
+                            <div class="col-12 md:col-6">
+                                <p class="text-900 font-medium mb-1">Price:</p>
+                                <p class="text-green-600 font-bold">{{ product()!.price | currency:'USD' }}</p>
+                            </div>
+                            <div class="col-12 md:col-6">
+                                <p class="text-900 font-medium mb-1">Quantity:</p>
+                                <p [class]="product()!.quantity && product()!.quantity > 10 ? 'text-green-600' : 'text-red-600'">
+                                    {{ product()!.quantity || 0 }}
+                                </p>
+                            </div>
+                            <div class="col-12 md:col-6">
+                                <p class="text-900 font-medium mb-1">Supplier ID:</p>
+                                <p>{{ product()!.supplierId || '-' }}</p>
+                            </div>
+                            <div class="col-12 md:col-6">
+                                <p class="text-900 font-medium mb-1">Created:</p>
+                                <p>{{ product()!.createdAt | date:'medium' }}</p>
+                            </div>
+                            <div class="col-12 md:col-6">
+                                <p class="text-900 font-medium mb-1">Last Updated:</p>
+                                <p>{{ product()!.updatedAt | date:'medium' }}</p>
+                            </div>
+                        </div>
+                    </p-fieldset>
+                </div>
+            </div>
+
+            <ng-template pTemplate="footer">
+                <div class="flex gap-4 mt-1">
+                    <p-button label="Back" icon="pi pi-arrow-left" routerLink="/pages/products" [outlined]="true" />
+                    <p-button label="Edit" icon="pi pi-pencil" severity="info" 
+                              [routerLink]="['/pages/products/edit', product()!.id]" [outlined]="true" />
+                </div>
+            </ng-template>
+        </p-card>
+    }
+</div>

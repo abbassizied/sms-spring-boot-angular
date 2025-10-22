@@ -31,3 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+# Ignore everything in the uploads folder
+src/main/resources/static/uploads/*
+
+# But do not ignore the .gitkeep file to keep the empty directory structure
+!src/main/resources/static/uploads/.gitkeep
