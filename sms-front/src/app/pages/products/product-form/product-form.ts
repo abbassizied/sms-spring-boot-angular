@@ -1,19 +1,18 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms'
+import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Product } from '../../../_models/product';
 import { ProductService } from '../../../_services/product';
 import { SupplierService } from '../../../_services/supplier';
-import { ProductFormData } from '../../../_models/product-form-data';
 
 @Component({
   selector: 'app-product-form',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './product-form.html',
-  styleUrl: './product-form.css'
+  styleUrl: './product-form.css',
 })
 export class ProductForm implements OnInit {
   private readonly fb = inject(FormBuilder);
@@ -32,6 +31,7 @@ export class ProductForm implements OnInit {
   existingProduct = signal<Product | null>(null);
   mainImagePreview = signal<string | null>(null);
   imagePreviews = signal<string[]>([]);
+
 
   productForm = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
@@ -61,8 +61,8 @@ export class ProductForm implements OnInit {
     this.productService.getProductById(id).subscribe({
       next: (product) => {
         this.existingProduct.set(product);
-        this.mainImagePreview.set(product.mainImageUrl ?? null);
-        this.imagePreviews.set(product.imagesUrl || []);
+        this.mainImagePreview.set(product.mainImage ?? null);
+        this.imagePreviews.set(product.images || []);
         this.productForm.patchValue({
           name: product.name,
           description: product.description,
@@ -73,10 +73,10 @@ export class ProductForm implements OnInit {
       },
       error: () => {
         // Handle navigation promise properly
-        this.router.navigate(['/products']).catch(err =>
-          console.error('Navigation failed:', err)
-        );
-      }
+        this.router
+          .navigate(['/products'])
+          .catch((err) => console.error('Navigation failed:', err));
+      },
     });
   }
 
@@ -101,10 +101,7 @@ export class ProductForm implements OnInit {
   private generateAdditionalPreview(file: File): void {
     const reader = new FileReader();
     reader.onload = () => {
-      this.imagePreviews.update((previews) => [
-        ...previews,
-        reader.result as string,
-      ]);
+      this.imagePreviews.update((previews) => [...previews, reader.result as string]);
     };
     reader.readAsDataURL(file);
   }
@@ -127,35 +124,74 @@ export class ProductForm implements OnInit {
     }
   }
 
-  onSubmit(): void {
-    if (this.productForm.invalid) return;
+  // Add this method to your ProductForm class
+  removeImage(index: number): void {
+    this.imagePreviews.update((previews) => previews.filter((_, i) => i !== index));
 
-    const formData = this.createFormData();
-    const operation = this.isEditMode()
-      ? this.productService.updateProduct(this.productId()!, formData)
-      : this.productService.createProduct(formData);
-
-    operation.subscribe({
-      next: () => {
-        this.router.navigate(['/products']).catch(err =>
-          console.error('Navigation failed:', err)
-        );
-      },
-      error: (err) => console.error('Error saving product:', err)
-    });
+    // Also update the form control if needed
+    const currentImages = this.productForm.get('images')?.value;
+    if (currentImages && Array.isArray(currentImages)) {
+      const updatedImages = currentImages.filter((_, i) => i !== index);
+      this.productForm.patchValue({ images: updatedImages });
+    }
   }
 
-  private createFormData(): ProductFormData {
-    const formValue = this.productForm.getRawValue();
-    return {
-      id: this.productId() ?? undefined,
-      name: formValue.name!,
-      description: formValue.description!,
-      price: formValue.price!,
-      quantity: formValue.quantity!,
-      supplierId: formValue.supplierId!,
-      mainImageUrl: formValue.mainImage!,
-      imagesUrl: formValue.images ?? [],
-    };
+  onSubmit(): void {
+    if (this.productForm.valid) {
+      const formValue = this.productForm.value;
+
+      // Construct JSON string from form values matching Spring Boot endpoint
+      const productJson = JSON.stringify({
+        name: formValue.name!,
+        description: formValue.description!,
+        price: formValue.price!,
+        quantity: formValue.quantity!,
+        supplierId: formValue.supplierId!,
+      });
+
+      const formData = new FormData();
+      formData.append('product', productJson); // key must be 'product' as per Spring Boot
+
+      // Debug FormData before sending
+      console.log('FormData contents before append:');
+      for (let pair of (formData as any).entries()) {
+        console.log(pair[0] + ': ', pair[1]);
+      }
+
+      // Append main image file if selected
+      const mainImageFile = formValue?.mainImage;
+      if (mainImageFile) {
+        formData.append('mainImage', mainImageFile);   // key must be 'mainImage' as per Spring Boot
+      }
+
+      // Append additional images if they exist
+      const additionalImages = formValue?.images;
+      if (additionalImages) {
+        for (const image of additionalImages) {
+          formData.append('images', image);
+        }
+      }
+
+      // Debug FormData after append
+      console.log('FormData contents after append:');
+      for (let pair of (formData as any).entries()) {
+        console.log(pair[0] + ': ', pair[1]);
+      }
+
+      // Send request
+      // Determine create vs update
+      const save$ = this.isEditMode()
+        ? this.productService.updateProduct(Number(this.productId()!), formData)
+        : this.productService.createProduct(formData);
+
+      save$.subscribe({
+        next: () => {
+          this.router
+            .navigate(['/products'])
+            .catch((err) => console.error('Navigation failed:', err));
+        },
+        error: (err) => console.error('Error saving product:', err),
+      });
+    }
   }
 }

@@ -3,14 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { SupplierService } from '../../../_services/supplier';
-import { SupplierFormData } from '../../../_models/supplier-form-data';
 
 @Component({
   selector: 'app-supplier-form',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './supplier-form.html',
-  styleUrl: './supplier-form.css'
+  styleUrl: './supplier-form.css',
 })
 export class SupplierForm implements OnInit {
   private readonly fb = inject(FormBuilder);
@@ -23,12 +22,14 @@ export class SupplierForm implements OnInit {
   existingLogoUrl = signal<string | undefined>(undefined);
   isSubmitting = signal(false);
 
+  selectedFile = signal<File | null>(null);
+
   supplierForm = this.fb.group({
     name: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     phone: ['', Validators.required],
     address: [''],
-    logoUrl: [null as File | null]
+    logoUrl: [null as File | null],
   });
 
   ngOnInit(): void {
@@ -48,10 +49,10 @@ export class SupplierForm implements OnInit {
           name: supplier.name,
           email: supplier.email,
           phone: supplier.phone,
-          address: supplier.address || ''
+          address: supplier.address || '',
         });
       },
-      error: (err) => console.error('Failed to load supplier:', err)
+      error: (err) => console.error('Failed to load supplier:', err),
     });
   }
 
@@ -66,22 +67,36 @@ export class SupplierForm implements OnInit {
       this.isSubmitting.set(true);
 
       const formValue = this.supplierForm.value;
-      const formData: SupplierFormData = {
-        id: this.supplierId() || undefined,
+
+      // Construct JSON string from form values
+      const supplierJson = JSON.stringify({
         name: formValue.name!,
         email: formValue.email!,
         phone: formValue.phone!,
-        address: formValue.address || undefined,
-        logoUrl: formValue.logoUrl || undefined
-      };
+        address: formValue.address!,
+      });
 
-      this.supplierService.save(formData).subscribe({
+      const formData = new FormData();
+      formData.append('supplier', supplierJson); // key must exactly be 'supplier'
+
+      // Append logo file if selected
+      const file = this.selectedFile();
+      if (file) {
+        formData.append('logoUrl', file);
+      }
+
+      // Determine create vs update
+      const save$ = this.isEditMode()
+        ? this.supplierService.updateSupplier(this.supplierId()!, formData)
+        : this.supplierService.createSupplier(formData);
+
+      save$.subscribe({
         next: () => this.router.navigate(['/suppliers']),
         error: (err) => {
           console.error('Error saving supplier:', err);
           this.isSubmitting.set(false);
         },
-        complete: () => this.isSubmitting.set(false)
+        complete: () => this.isSubmitting.set(false),
       });
     }
   }

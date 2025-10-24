@@ -4,7 +4,7 @@ export interface Product {
   description: string;
   price: number;
   quantity: number;
-  mainImageUrl?: string;
-  imagesUrl?: string[];
+  mainImage?: string;
+  images?: string[];
   supplierId: number;
 }
