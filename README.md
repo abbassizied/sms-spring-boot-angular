@@ -39,7 +39,7 @@ ng serve -o
   "password": "securePassword123",
   "firstName": "Zied",
   "lastName": "Abbassi",
-  "role": ["super_admin" "admin", "user"]
+  "role": ["super_admin", "admin", "user"]
 }
 
 {

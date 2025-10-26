@@ -43,17 +43,19 @@ public class Product {
 
 	/*
 	 * 
-	 * FetchType.LAZY = Doesn’t load the relationships unless explicitly “asked for” via getter 
+	 * FetchType.LAZY = Doesn’t load the relationships unless explicitly “asked for”
+	 * via getter
 	 * FetchType.EAGER = Loads ALL relationships
-	 */	
-	
+	 */
+
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "supplier_id", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Supplier supplier;
 
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Image> images;
+	@Builder.Default
+	private List<Image> images = new ArrayList<>();
 
 	@CreatedDate
 	@Column(nullable = false, updatable = false)

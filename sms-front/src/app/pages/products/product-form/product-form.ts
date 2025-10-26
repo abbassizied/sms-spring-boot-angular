@@ -32,7 +32,6 @@ export class ProductForm implements OnInit {
   mainImagePreview = signal<string | null>(null);
   imagePreviews = signal<string[]>([]);
 
-
   productForm = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
     description: ['', [Validators.required, Validators.minLength(10)]],
@@ -161,7 +160,7 @@ export class ProductForm implements OnInit {
       // Append main image file if selected
       const mainImageFile = formValue?.mainImage;
       if (mainImageFile) {
-        formData.append('mainImage', mainImageFile);   // key must be 'mainImage' as per Spring Boot
+        formData.append('mainImage', mainImageFile); // key must be 'mainImage' as per Spring Boot
       }
 
       // Append additional images if they exist

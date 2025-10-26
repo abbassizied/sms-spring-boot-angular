@@ -1,13 +1,15 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../_services/auth';
+import { User } from '../../_models/user.model';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-admin',
   standalone: true,
   imports: [],
-  templateUrl: './home.html',
-  styleUrl: './home.css',
+  templateUrl: './admin.html',
+  styleUrl: './admin.css',
 })
-export class Home {
+export class Admin {
   private readonly authService = inject(AuthService);
+  currentUser: User | null = null;
 }

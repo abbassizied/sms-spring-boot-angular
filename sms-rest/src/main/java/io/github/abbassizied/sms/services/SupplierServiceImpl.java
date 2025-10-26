@@ -29,12 +29,18 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     @Transactional
     public SupplierResponse createSupplier(SupplierRequest supplierRequest, MultipartFile logoUrl) throws IOException {
-        
-    	Supplier supplier = supplierMapper.supplierRequestToSupplier(supplierRequest);
+
+        // System.out.println("logoUrl: " + logoUrl);
+
+        Supplier supplier = supplierMapper.supplierRequestToSupplier(supplierRequest);
+
+        // System.out.println("supplier------> "+supplier);
 
         if (logoUrl != null && !logoUrl.isEmpty()) {
             supplier.setLogoUrl(fileService.saveFile(logoUrl));
         }
+
+        // System.out.println("supplier+++++++++> "+supplier);
 
         Supplier savedSupplier = supplierRepository.save(supplier);
         log.info("Created new supplier with ID: {}", savedSupplier.getId());
@@ -43,8 +49,9 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     @Transactional
-    public SupplierResponse updateSupplier(Long id, SupplierRequest supplierRequest, MultipartFile logoUrl) throws IOException {
-        
+    public SupplierResponse updateSupplier(Long id, SupplierRequest supplierRequest, MultipartFile logoUrl)
+            throws IOException {
+
         Supplier existingSupplier = supplierRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Supplier not found with id: " + id));
 
@@ -57,12 +64,12 @@ public class SupplierServiceImpl implements SupplierService {
         String newLogoUrl = fileService.updateFile(logoUrl, existingSupplier.getLogoUrl());
         existingSupplier.setLogoUrl(newLogoUrl); // Save new file
         /*
-        if (logoUrl != null && !logoUrl.isEmpty()) {
-            fileService.deleteFile(existingSupplier.getLogoUrl()); // Delete old file
-            existingSupplier.setLogoUrl(fileService.saveFile(logoUrl)); // Save new file
-        }
-        */
-        
+         * if (logoUrl != null && !logoUrl.isEmpty()) {
+         * fileService.deleteFile(existingSupplier.getLogoUrl()); // Delete old file
+         * existingSupplier.setLogoUrl(fileService.saveFile(logoUrl)); // Save new file
+         * }
+         */
+
         Supplier updatedSupplier = supplierRepository.save(existingSupplier);
         log.info("Updated supplier with ID: {}", id);
         return supplierMapper.supplierToSupplierResponse(updatedSupplier);
@@ -71,7 +78,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     @Transactional
     public SupplierResponse deleteSupplier(Long id) {
-    	
+
         Supplier supplier = supplierRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Supplier not found with id: " + id));
 
@@ -84,7 +91,7 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     @Transactional(readOnly = true)
     public SupplierResponse getSupplierById(Long id) {
-    	
+
         Supplier supplier = supplierRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Supplier not found with id: " + id));
         return supplierMapper.supplierToSupplierResponse(supplier);
@@ -98,11 +105,11 @@ public class SupplierServiceImpl implements SupplierService {
                 .map(supplierMapper::supplierToSupplierResponse)
                 .toList();
     }
-    
+
     @Override
     @Transactional(readOnly = true)
     public Page<SupplierResponse> getAllSuppliers(Pageable pageable) {
         return supplierRepository.findAll(pageable)
                 .map(supplierMapper::supplierToSupplierResponse);
-    }    
+    }
 }

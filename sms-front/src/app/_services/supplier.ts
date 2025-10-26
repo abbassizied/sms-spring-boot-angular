@@ -1,14 +1,14 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Supplier } from '../_models/supplier';
 import { environment } from '../../environments/environment';
+import { PageResponse } from '../_models/pagination.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SupplierService {
-
   private readonly apiUrl = `${environment.apiUrl}/suppliers`;
   private readonly http = inject(HttpClient);
 
@@ -19,6 +19,29 @@ export class SupplierService {
 
   getSuppliers(): Observable<Supplier[]> {
     return this.http.get<Supplier[]>(this.apiUrl);
+  }
+
+  getSuppliersWithPagination(page: number, size: number): Observable<PageResponse<Supplier>> {
+    return this.http.get<Supplier[]>(`${this.apiUrl}`).pipe(
+      map((suppliers: Supplier[]) => {
+        // Client-side pagination
+        const startIndex = page * size;
+        const endIndex = startIndex + size;
+        const paginatedSuppliers = suppliers.slice(startIndex, endIndex);
+
+        return {
+          content: paginatedSuppliers,
+          totalElements: suppliers.length,
+          totalPages: Math.ceil(suppliers.length / size),
+          number: page,
+          size: size,
+          numberOfElements: paginatedSuppliers.length,
+          first: page === 0,
+          last: endIndex >= suppliers.length,
+          empty: paginatedSuppliers.length === 0,
+        };
+      })
+    );
   }
 
   getSupplier(id: number): Observable<Supplier> {
@@ -36,22 +59,4 @@ export class SupplierService {
   updateSupplier(id: number, data: FormData): Observable<Supplier> {
     return this.http.put<Supplier>(`${this.apiUrl}/${id}`, data);
   }
-  /*
-    private mapToFormData(data: SupplierFormData): FormData {
-      const formData = new FormData();
-      if (data.id !== undefined && data.id !== null) {
-        formData.append('id', String(data.id)); // Convert number to string
-      }
-      formData.append('name', data.name);
-      formData.append('email', data.email);
-      formData.append('phone', data.phone);
-      if (data.address !== undefined && data.address !== null) {
-        formData.append('address', data.address); // Ensure it's defined
-      }
-      if (data.logoUrl && data.logoUrl instanceof File) {
-        formData.append('logoUrl', data.logoUrl);
-      }
-      return formData;
-    }
-      */
 }

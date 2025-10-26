@@ -1,6 +1,8 @@
 <!-- product-form.html -->
 <div class="bg-white rounded-lg shadow p-6">
-  <h2 class="text-lg font-semibold text-gray-800 mb-4">{{ isEditMode() ? 'Edit Product' : 'Create Product' }}</h2>
+  <h2 class="text-lg font-semibold text-gray-800 mb-4">
+    {{ isEditMode() ? 'Edit Product' : 'Create Product' }}
+  </h2>
 
   <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="space-y-4">
     <!-- Two Column Layout -->
@@ -12,9 +14,11 @@
           <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Product Name *</label>
           <input type="text" id="name" formControlName="name"
             class="w-full px-2.5 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 transition-colors"
-            placeholder="Enter product name" required
-            [class.input-error]="productForm.controls.name.invalid && productForm.controls.name.touched"
-            [class.input-success]="productForm.controls.name.valid && productForm.controls.name.touched">
+            placeholder="Enter product name" required [class.input-error]="
+              productForm.controls.name.invalid && productForm.controls.name.touched
+            " [class.input-success]="
+              productForm.controls.name.valid && productForm.controls.name.touched
+            " />
           @if (productForm.controls.name.invalid && productForm.controls.name.touched) {
           <div role="alert" class="text-red-600 text-xs mt-1 flex items-center">
             <i class="fas fa-exclamation-circle mr-1"></i>
@@ -30,9 +34,11 @@
             <span class="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">$</span>
             <input type="number" id="price" formControlName="price" step="0.01" min="0"
               class="w-full pl-7 pr-2.5 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 transition-colors"
-              placeholder="0.00" required
-              [class.input-error]="productForm.controls.price.invalid && productForm.controls.price.touched"
-              [class.input-success]="productForm.controls.price.valid && productForm.controls.price.touched">
+              placeholder="0.00" required [class.input-error]="
+                productForm.controls.price.invalid && productForm.controls.price.touched
+              " [class.input-success]="
+                productForm.controls.price.valid && productForm.controls.price.touched
+              " />
           </div>
           @if (productForm.controls.price.invalid && productForm.controls.price.touched) {
           <div role="alert" class="text-red-600 text-xs mt-1 flex items-center">
@@ -50,9 +56,11 @@
           <label for="supplierId" class="block text-sm font-medium text-gray-700 mb-1">Supplier *</label>
           <select id="supplierId" formControlName="supplierId"
             class="w-full px-2.5 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 transition-colors"
-            required
-            [class.input-error]="productForm.controls.supplierId.invalid && productForm.controls.supplierId.touched"
-            [class.input-success]="productForm.controls.supplierId.valid && productForm.controls.supplierId.touched">
+            required [class.input-error]="
+              productForm.controls.supplierId.invalid && productForm.controls.supplierId.touched
+            " [class.input-success]="
+              productForm.controls.supplierId.valid && productForm.controls.supplierId.touched
+            ">
             <option value="">Select a supplier</option>
             @for (supplier of suppliers(); track supplier.id) {
             <option [value]="supplier.id">{{ supplier.name }}</option>
@@ -71,9 +79,11 @@
           <label for="quantity" class="block text-sm font-medium text-gray-700 mb-1">Quantity *</label>
           <input type="number" id="quantity" formControlName="quantity" min="0"
             class="w-full px-2.5 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 transition-colors"
-            placeholder="0" required
-            [class.input-error]="productForm.controls.quantity.invalid && productForm.controls.quantity.touched"
-            [class.input-success]="productForm.controls.quantity.valid && productForm.controls.quantity.touched">
+            placeholder="0" required [class.input-error]="
+              productForm.controls.quantity.invalid && productForm.controls.quantity.touched
+            " [class.input-success]="
+              productForm.controls.quantity.valid && productForm.controls.quantity.touched
+            " />
           @if (productForm.controls.quantity.invalid && productForm.controls.quantity.touched) {
           <div role="alert" class="text-red-600 text-xs mt-1 flex items-center">
             <i class="fas fa-exclamation-circle mr-1"></i>
@@ -91,9 +101,11 @@
         <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description *</label>
         <textarea id="description" formControlName="description" rows="3"
           class="w-full px-2.5 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 transition-colors"
-          placeholder="Enter product description" required
-          [class.input-error]="productForm.controls.description.invalid && productForm.controls.description.touched"
-          [class.input-success]="productForm.controls.description.valid && productForm.controls.description.touched"></textarea>
+          placeholder="Enter product description" required [class.input-error]="
+            productForm.controls.description.invalid && productForm.controls.description.touched
+          " [class.input-success]="
+            productForm.controls.description.valid && productForm.controls.description.touched
+          "></textarea>
         @if (productForm.controls.description.invalid && productForm.controls.description.touched) {
         <div role="alert" class="text-red-600 text-xs mt-1 flex items-center">
           <i class="fas fa-exclamation-circle mr-1"></i>
@@ -113,7 +125,8 @@
               <label for="mainImage"
                 class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none">
                 <span>Upload a file</span>
-                <input type="file" id="mainImage" accept="image/*" (change)="onMainImageChange($event)" class="sr-only">
+                <input type="file" id="mainImage" accept="image/*" (change)="onMainImageChange($event)"
+                  class="sr-only" />
               </label>
               <p class="pl-1">or drag and drop</p>
             </div>
@@ -121,7 +134,7 @@
             } @else {
             <div class="relative inline-block">
               <img [src]="mainImagePreview()" alt="Main product preview" title="Main product preview"
-                class="h-32 w-auto rounded-md shadow-sm">
+                class="h-32 w-auto rounded-md shadow-sm" />
               <button type="button" (click)="mainImagePreview.set(null); productForm.patchValue({ mainImage: null })"
                 class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600"
                 title="Remove main image" aria-label="Remove main image">
@@ -137,14 +150,14 @@
       <div>
         <label for="additionalImages" class="block text-sm font-medium text-gray-700 mb-1">Additional Images</label>
         <input type="file" id="additionalImages" accept="image/*" multiple (change)="onImagesChange($event)"
-          class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+          class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
 
         <!-- Image Previews -->
         <div class="mt-3 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
           @for (preview of imagePreviews(); track $index; let i = $index) {
           <div class="relative group">
-            <img [src]="preview" alt="Additional {{i + 1}}" title="Additional image {{i + 1}}"
-              class="h-24 w-full object-cover rounded-md shadow-sm">
+            <img [src]="preview" alt="Additional {{ i + 1 }}" title="Additional image {{ i + 1 }}"
+              class="h-24 w-full object-cover rounded-md shadow-sm" />
             <button type="button" (click)="removeImage(i)"
               class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"
               title="Remove image" aria-label="Remove image">

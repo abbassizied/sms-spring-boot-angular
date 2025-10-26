@@ -2,13 +2,103 @@
 	"info": {
 		"_postman_id": "276145c7-bedf-4486-b794-73ec775d86e2",
 		"name": "sms-spring-boot-angular",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "10958206"
 	},
 	"item": [
 		{
-			"name": "add new Supplier",
+			"name": "User Registration (Sign Up)",
 			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"abbassi_zied2025\",\r\n  \"email\": \"abbassizied2025@outlook.fr\",\r\n  \"password\": \"securePassword123\",\r\n  \"firstName\": \"Zied\",\r\n  \"lastName\": \"Abbassi\",\r\n  \"role\": [\"super_admin\", \"admin\", \"user\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8999/api/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8999",
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Login (Sign In)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"abbassi_zied\",\r\n  \"password\": \"securePassword123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8999/api/auth/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8999",
+					"path": [
+						"api",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Public Endpoint",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8999/api/public",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8999",
+					"path": [
+						"api",
+						"public"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add new Supplier (with logo)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmJhc3NpX3ppZWQiLCJpYXQiOjE3NjE0OTE1OTEsImV4cCI6MTc2MTU3Nzk5MX0.y5LP2xD1mBaPP7T98VwrzikIamC4uf9ocbq90w8UJAk",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -16,32 +106,44 @@
 					"formdata": [
 						{
 							"key": "supplier",
-							"value": "{\"name\": \"Supplier A\", \"email\": \"supplier@example.com\",\"phone\": \"123456789\", \"address\": \"123 Street\"}",
+							"value": "{\"name\":\"Tech Supplier\",\"email\":\"contact@tech.com\",\"phone\":\"123-456-7890\",\"address\":\"123 Tech St\"}",
 							"type": "text"
 						},
 						{
 							"key": "logoUrl",
 							"type": "file",
-							"src": "/C:/Users/Zied/Desktop/Avril-2025/images-4-test/suppliers/toyota-logo.png"
+							"src": "/C:/Users/Zied/Desktop/Workshops/sms-spring-boot-angular/gallery.png"
 						}
 					]
 				},
-				"url": "http://localhost:8080/api/suppliers"
-			},
-			"response": []
-		},
-		{
-			"name": "get All Suppliers",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": "http://localhost:8080/api/suppliers"
+				"url": {
+					"raw": "http://localhost:8999/api/suppliers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8999",
+					"path": [
+						"api",
+						"suppliers"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "update a Supplier by Id",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmJhc3NpX3ppZWQiLCJpYXQiOjE3NjE0OTIyNzIsImV4cCI6MTc2MTU3ODY3Mn0.NBf2nLXCNZ0LTpn-NUYaVJkWnlfwMtElAYBcriqwLuM",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PUT",
 				"header": [],
 				"body": {
@@ -49,35 +151,166 @@
 					"formdata": [
 						{
 							"key": "supplier",
-							"value": "{\"name\": \"Supplier A\", \"email\": \"supplier@example.com\",\"phone\": \"123456789\", \"address\": \"123 Street\"}",
+							"value": "{\"name\":\"Updated Supplier\",\"email\":\"updated@tech.com\",\"phone\":\"098-765-4321\",\"address\":\"456 New St\"}",
 							"type": "text"
 						},
 						{
 							"key": "logoUrl",
 							"type": "file",
-							"src": "/C:/Users/Zied/Desktop/Avril-2025/images-4-test/suppliers/samsung.jpg"
+							"src": "/C:/Users/Zied/Desktop/Workshops/sms-spring-boot-angular/gallery.png"
 						}
 					]
 				},
-				"url": "http://localhost:8080/api/suppliers/4"
-			},
-			"response": []
-		},
-		{
-			"name": "delete a Supplier by Id",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": "http://localhost:8080/api/suppliers/7"
+				"url": {
+					"raw": "http://localhost:8999/api/suppliers/13",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8999",
+					"path": [
+						"api",
+						"suppliers",
+						"13"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "get a Supplier by Id",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmJhc3NpX3ppZWQiLCJpYXQiOjE3NjE0OTIyNzIsImV4cCI6MTc2MTU3ODY3Mn0.NBf2nLXCNZ0LTpn-NUYaVJkWnlfwMtElAYBcriqwLuM",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
-				"url": "http://localhost:8080/api/suppliers/4"
+				"url": {
+					"raw": "http://localhost:8999/api/suppliers/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8999",
+					"path": [
+						"api",
+						"suppliers",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get All Suppliers",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmJhc3NpX3ppZWQiLCJpYXQiOjE3NjE0OTIyNzIsImV4cCI6MTc2MTU3ODY3Mn0.NBf2nLXCNZ0LTpn-NUYaVJkWnlfwMtElAYBcriqwLuM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8999/api/suppliers/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8999",
+					"path": [
+						"api",
+						"suppliers",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Suppliers (Pagination)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmJhc3NpX3ppZWQiLCJpYXQiOjE3NjE0OTIyNzIsImV4cCI6MTc2MTU3ODY3Mn0.NBf2nLXCNZ0LTpn-NUYaVJkWnlfwMtElAYBcriqwLuM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8999/api/suppliers?page=0&size=10&sort=name,asc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8999",
+					"path": [
+						"api",
+						"suppliers"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "sort",
+							"value": "name,asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a Supplier by Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmJhc3NpX3ppZWQiLCJpYXQiOjE3NjE0OTIyNzIsImV4cCI6MTc2MTU3ODY3Mn0.NBf2nLXCNZ0LTpn-NUYaVJkWnlfwMtElAYBcriqwLuM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8999/api/suppliers/12",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8999",
+					"path": [
+						"api",
+						"suppliers",
+						"12"
+					]
+				}
 			},
 			"response": []
 		},
@@ -85,7 +318,14 @@
 			"name": "Create new product with images",
 			"request": {
 				"auth": {
-					"type": "noauth"
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmJhc3NpX3ppZWQiLCJpYXQiOjE3NjE0OTIyNzIsImV4cCI6MTc2MTU3ODY3Mn0.NBf2nLXCNZ0LTpn-NUYaVJkWnlfwMtElAYBcriqwLuM",
+							"type": "string"
+						}
+					]
 				},
 				"method": "POST",
 				"header": [],
@@ -94,27 +334,33 @@
 					"formdata": [
 						{
 							"key": "product",
-							"value": "{\"name\": \"Premium Coffee\",\"description\": \"Arabica coffee beans from Colombia\",\"price\": 12,\"quantity\": 100,\"supplierId\": 1}",
+							"value": "{\"name\":\"Laptop\",\"description\":\"Gaming laptop\",\"price\":999.99,\"quantity\":10,\"supplierId\":1}",
 							"type": "text"
 						},
 						{
 							"key": "mainImage",
 							"type": "file",
-							"src": "/C:/Users/Zied/Desktop/Avril-2025/images-4-test/products/download.jpeg"
+							"src": "/C:/Users/Zied/Desktop/Workshops/sms-spring-boot-angular/gallery.png"
 						},
 						{
 							"key": "images",
 							"type": "file",
-							"src": [
-								"/C:/Users/Zied/Desktop/Avril-2025/images-4-test/products/download.jpeg",
-								"/C:/Users/Zied/Desktop/Avril-2025/images-4-test/products/apple-macbook-air-m1-8go-256go-ssd-gris-4.jpg",
-								"/C:/Users/Zied/Desktop/Avril-2025/images-4-test/products/apple-watch-se-gps-44mm-starlight-aluminium (1).jpg",
-								"/C:/Users/Zied/Desktop/Avril-2025/images-4-test/products/TOYOTA-Yaris-Cross-2021-Neuve-Maroc-12.jpg"
-							]
+							"src": "/C:/Users/Zied/Desktop/Workshops/sms-spring-boot-angular/gallery.png"
 						}
 					]
 				},
-				"url": "http://localhost:8080/api/products"
+				"url": {
+					"raw": "http://localhost:8999/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8999",
+					"path": [
+						"api",
+						"products"
+					]
+				}
 			},
 			"response": []
 		},
@@ -122,11 +368,30 @@
 			"name": "Get single product",
 			"request": {
 				"auth": {
-					"type": "noauth"
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmJhc3NpX3ppZWQiLCJpYXQiOjE3NjE0OTIyNzIsImV4cCI6MTc2MTU3ODY3Mn0.NBf2nLXCNZ0LTpn-NUYaVJkWnlfwMtElAYBcriqwLuM",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
-				"url": "http://localhost:8080/api/products/2"
+				"url": {
+					"raw": "http://localhost:8999/api/products/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8999",
+					"path": [
+						"api",
+						"products",
+						"1"
+					]
+				}
 			},
 			"response": []
 		},
@@ -134,11 +399,43 @@
 			"name": "Get paginated products",
 			"request": {
 				"auth": {
-					"type": "noauth"
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmJhc3NpX3ppZWQiLCJpYXQiOjE3NjE0OTIyNzIsImV4cCI6MTc2MTU3ODY3Mn0.NBf2nLXCNZ0LTpn-NUYaVJkWnlfwMtElAYBcriqwLuM",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
-				"url": "http://localhost:8080/api/products"
+				"url": {
+					"raw": "http://localhost:8999/api/products?page=0&size=10&sort=price,desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8999",
+					"path": [
+						"api",
+						"products"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "sort",
+							"value": "price,desc"
+						}
+					]
+				}
 			},
 			"response": []
 		},
@@ -146,11 +443,30 @@
 			"name": "Get all products (non-paginated)",
 			"request": {
 				"auth": {
-					"type": "noauth"
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmJhc3NpX3ppZWQiLCJpYXQiOjE3NjE0OTIyNzIsImV4cCI6MTc2MTU3ODY3Mn0.NBf2nLXCNZ0LTpn-NUYaVJkWnlfwMtElAYBcriqwLuM",
+							"type": "string"
+						}
+					]
 				},
 				"method": "GET",
 				"header": [],
-				"url": "http://localhost:8080/api/products/all"
+				"url": {
+					"raw": "http://localhost:8999/api/products/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8999",
+					"path": [
+						"api",
+						"products",
+						"all"
+					]
+				}
 			},
 			"response": []
 		},
@@ -158,7 +474,14 @@
 			"name": "Update product",
 			"request": {
 				"auth": {
-					"type": "noauth"
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmJhc3NpX3ppZWQiLCJpYXQiOjE3NjE0OTY2MzksImV4cCI6MTc2MTU4MzAzOX0.BkdR5UZxblmdLXIT0Xz0dReWQM3E3thSaS-in9_iXGo",
+							"type": "string"
+						}
+					]
 				},
 				"method": "PUT",
 				"header": [],
@@ -167,12 +490,34 @@
 					"formdata": [
 						{
 							"key": "product",
-							"value": "{\"name\": \"Laptop\",\"price\": 999.99,\"description\": \"High-performance laptop\",\"quantity\": 99,\"supplierId\": 3 }",
+							"value": "{\"name\":\"Updated Laptop\",\"description\":\"Updated description\",\"price\":899.99,\"quantity\":5,\"supplierId\":1}",
 							"type": "text"
+						},
+						{
+							"key": "mainImage",
+							"type": "file",
+							"src": "/C:/Users/Zied/Desktop/Workshops/sms-spring-boot-angular/gallery.png"
+						},
+						{
+							"key": "images",
+							"type": "file",
+							"src": "/C:/Users/Zied/Desktop/Workshops/sms-spring-boot-angular/gallery.png"
 						}
 					]
 				},
-				"url": "http://localhost:8080/api/products/2"
+				"url": {
+					"raw": "http://localhost:8999/api/products/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8999",
+					"path": [
+						"api",
+						"products",
+						"1"
+					]
+				}
 			},
 			"response": []
 		},
@@ -180,11 +525,30 @@
 			"name": "Delete product",
 			"request": {
 				"auth": {
-					"type": "noauth"
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmJhc3NpX3ppZWQiLCJpYXQiOjE3NjE0OTY2MzksImV4cCI6MTc2MTU4MzAzOX0.BkdR5UZxblmdLXIT0Xz0dReWQM3E3thSaS-in9_iXGo",
+							"type": "string"
+						}
+					]
 				},
 				"method": "DELETE",
 				"header": [],
-				"url": "http://localhost:8080/api/products/{id}"
+				"url": {
+					"raw": "http://localhost:8999/api/products/13",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8999",
+					"path": [
+						"api",
+						"products",
+						"13"
+					]
+				}
 			},
 			"response": []
 		}
