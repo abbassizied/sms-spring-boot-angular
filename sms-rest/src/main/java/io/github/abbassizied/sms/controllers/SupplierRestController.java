@@ -9,6 +9,8 @@ import io.github.abbassizied.sms.dtos.responses.SupplierResponse;
 import io.github.abbassizied.sms.services.SupplierService;
 
 import org.springframework.data.domain.Pageable;
+
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -16,15 +18,12 @@ import java.util.List;
 
 @Slf4j
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/suppliers")
 @CrossOrigin(origins = "http://localhost:4200") // Allow Angular frontend
 public class SupplierRestController {
 
     private final SupplierService supplierService;
-
-    public SupplierRestController(SupplierService supplierService) {
-        this.supplierService = supplierService;
-    }
 
     @PostMapping(consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     public SupplierResponse createSupplier(
